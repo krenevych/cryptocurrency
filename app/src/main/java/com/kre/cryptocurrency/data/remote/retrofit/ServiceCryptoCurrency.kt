@@ -20,6 +20,17 @@ interface ServiceCryptoCurrency {
 
         ): CoinResponse?
 
+    @GET("data/pricemultifull")
+    suspend fun getCurrencyExchange(
+
+        @Query(QUERY_PARAM_FROM_SYMBOLS)
+        fromCurrency: String = BASE_CRYPTO_CURRENCY,
+
+        @Query(QUERY_PARAM_TO_SYMBOLS)
+        toCurrency: String = BASE_CURRENCY,
+
+        ): CoinResponse?
+
 //    https://min-api.cryptocompare.com/data/price?fsym=BTC&tsyms=USD,JPY,EUR
     @GET("data/price")
     suspend fun getCurrencyData(
