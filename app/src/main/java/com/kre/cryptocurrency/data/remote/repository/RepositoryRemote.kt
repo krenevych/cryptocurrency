@@ -1,6 +1,5 @@
 package com.kre.cryptocurrency.data.remote.repository
 
-import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.google.gson.Gson
@@ -26,12 +25,12 @@ class RepositoryRemote @Inject constructor(
     override suspend fun retrieve(numberCurrency: Int) {
         val responseCall = serviceCryptoCurrency.getCurrencyList(limit = numberCurrency)
 
-        val coinsMap = mutableMapOf<String, CoinInfoRetrofit>()
-        val coinsList = responseCall?.let { response ->
+        val cryptoCoinsMap = mutableMapOf<String, CoinInfoRetrofit>()
+        val cryptoCoinsNames = responseCall?.let { response ->
             val coins = mutableListOf<String>()
             response.coins?.forEach { data ->
                 data.coinInfo?.name?.let {
-                    coinsMap[it] = data.coinInfo
+                    cryptoCoinsMap[it] = data.coinInfo
                     coins.add(it)
                 }
             }
@@ -39,16 +38,12 @@ class RepositoryRemote @Inject constructor(
             coins
         }
 
-        val coinsNames = coinsList?.joinToString(",")
-
-
-        Log.d(TAG, "retrieve: $coinsNames")
-
-        coinsNames?.let {
-            serviceCryptoCurrency.getCurrencyExchange(fromCurrency = coinsNames)
+        val queryCryptoCoinsNames = cryptoCoinsNames?.joinToString(",")
+        queryCryptoCoinsNames?.let {
+            serviceCryptoCurrency.getCurrencyExchange(fromCurrency = queryCryptoCoinsNames)
                 ?.also { coinRawData ->
                     val listCurrency = mutableListOf<CoinInfo>()
-                    for (coinName in coinsList) {
+                    for (coinName in cryptoCoinsNames) {
                         coinRawData.jsonObject?.let { jsonObject ->
                             if (jsonObject.has(coinName)) {
 
@@ -59,7 +54,7 @@ class RepositoryRemote @Inject constructor(
                                 val coinExchangeInfo =
                                     Gson().fromJson(crypto, CoinExchangeInfo::class.java)
 
-                                coinsMap[coinName]?.let {
+                                cryptoCoinsMap[coinName]?.let {
                                     listCurrency.add(
                                         coinExchangeInfo.toCoinBase(
                                             id = it.id!!,
