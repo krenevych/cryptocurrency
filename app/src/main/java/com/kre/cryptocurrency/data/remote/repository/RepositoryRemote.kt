@@ -55,12 +55,17 @@ class RepositoryRemote @Inject constructor(
                                     Gson().fromJson(crypto, CoinExchangeInfo::class.java)
 
                                 cryptoCoinsMap[coinName]?.let {
-                                    listCurrency.add(
-                                        coinExchangeInfo.toCoinBase(
-                                            id = it.id!!,
-                                            fullName = it.fullName!!
+
+                                    it.id?.let {id ->
+                                        listCurrency.add(
+                                            coinExchangeInfo.toCoinBase(
+                                                id = id,
+                                                fullName = it.fullName ?: it.name ?: ""
+                                            )
                                         )
-                                    )
+                                    }
+
+
                                 }
 
                             }
