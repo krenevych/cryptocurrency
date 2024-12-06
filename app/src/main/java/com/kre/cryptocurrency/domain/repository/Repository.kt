@@ -5,5 +5,5 @@ import com.kre.cryptocurrency.domain.coin.CoinInfo
 
 interface Repository {
     fun getLiveData() : LiveData<List<CoinInfo>>
-    fun retrieve()
+    suspend fun retrieve(numberCurrency: Int)
 }

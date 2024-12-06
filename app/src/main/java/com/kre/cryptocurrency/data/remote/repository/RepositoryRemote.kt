@@ -1,16 +1,11 @@
 package com.kre.cryptocurrency.data.remote.repository
 
-import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.kre.cryptocurrency.data.remote.model.CoinInfoRetrofit
-import com.kre.cryptocurrency.data.remote.model.CoinResponse
 import com.kre.cryptocurrency.data.remote.retrofit.ServiceCryptoCurrency
 import com.kre.cryptocurrency.domain.coin.CoinInfo
 import com.kre.cryptocurrency.domain.repository.Repository
-import retrofit2.Call
-import retrofit2.Callback
-import retrofit2.Response
 import javax.inject.Inject
 
 class RepositoryRemote @Inject constructor(
@@ -23,35 +18,52 @@ class RepositoryRemote @Inject constructor(
         return _liveData
     }
 
-    override fun retrieve() {
-        val responseCall = serviceCryptoCurrency.getCurrencyList(limit = 15)
-        responseCall?.enqueue(object : Callback<CoinResponse> {
-            override fun onResponse(coinResponseCall: Call<CoinResponse>, response: Response<CoinResponse>) {
+    override suspend fun retrieve(numberCurrency: Int) {
+        val responseCall = serviceCryptoCurrency.getCurrencyList(limit = numberCurrency)
 
-                response.body()?.let {
 
-                    it.coins ?: return
 
-                    val coins = mutableListOf<CoinInfo>()
-                    it.coins.forEach { data ->
-                        data.coinInfo?.let { coinInfo: CoinInfoRetrofit ->
-                            coins += coinInfo.toCoinBase()
-                        }
-                    }
+        responseCall?.let {
+            it.coins ?: return
 
-                    _liveData.value = coins
+            val coins = mutableListOf<CoinInfo>()
+            it.coins.forEach { data ->
+                data.coinInfo?.let { coinInfo: CoinInfoRetrofit ->
+                    coins += coinInfo.toCoinBase()
                 }
-
-
             }
 
-            override fun onFailure(coinResponseCall: Call<CoinResponse>, throwable: Throwable) {
-                Log.e(TAG, "onFailure: $throwable")
+            _liveData.value = coins
+        }
 
-                _liveData.value = listOf()
-            }
 
-        })
+//        responseCall?.enqueue(object : Callback<CoinResponse> {
+//            override fun onResponse(coinResponseCall: Call<CoinResponse>, response: Response<CoinResponse>) {
+//
+//                response.body()?.let {
+//
+//                    it.coins ?: return
+//
+//                    val coins = mutableListOf<CoinInfo>()
+//                    it.coins.forEach { data ->
+//                        data.coinInfo?.let { coinInfo: CoinInfoRetrofit ->
+//                            coins += coinInfo.toCoinBase()
+//                        }
+//                    }
+//
+//                    _liveData.value = coins
+//                }
+//
+//
+//            }
+//
+//            override fun onFailure(coinResponseCall: Call<CoinResponse>, throwable: Throwable) {
+//                Log.e(TAG, "onFailure: $throwable")
+//
+//                _liveData.value = listOf()
+//            }
+//
+//        })
 
     }
 

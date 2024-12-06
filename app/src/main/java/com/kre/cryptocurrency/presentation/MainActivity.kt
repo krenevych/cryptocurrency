@@ -40,7 +40,7 @@ class MainActivity : AppCompatActivity() {
     override fun onStart() {
         super.onStart()
 
-        viewModel.retrieve()
+        viewModel.retrieve(50)
     }
 
     private fun setupLiveData() {
@@ -53,7 +53,7 @@ class MainActivity : AppCompatActivity() {
     private fun setupButtons() {
         binding.buttonReceive.setOnClickListener {
             Log.d(TAG, "button click: ")
-            viewModel.retrieve()
+            viewModel.retrieve(50)
         }
     }
 

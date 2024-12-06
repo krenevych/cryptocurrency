@@ -4,11 +4,11 @@ import com.kre.cryptocurrency.domain.repository.Repository
 import javax.inject.Inject
 
 class RetrieveDataUseCase @Inject constructor(
-    private val repository: Repository
+    private val repository: Repository,
 ) {
 
-    operator fun invoke() {
-        repository.retrieve()
+    suspend operator fun invoke(numberCurrency: Int) {
+        repository.retrieve(numberCurrency)
     }
 
 }

@@ -11,23 +11,23 @@ interface ServiceCryptoCurrency {
 
 //    https://min-api.cryptocompare.com/data/top/totalvolfull?limit=3&tsym=USD
     @GET("data/top/totalvolfull")
-    fun getCurrencyList(
+    suspend fun getCurrencyList(
         @Query(QUERY_PARAM_LIMIT)
         limit: Int = 10,
 
         @Query(QUERY_PARAM_TO_SYMBOL)
         toCurrency: String = BASE_CURRENCY,
 
-        ): Call<CoinResponse>?
+        ): CoinResponse?
 
 //    https://min-api.cryptocompare.com/data/price?fsym=BTC&tsyms=USD,JPY,EUR
     @GET("data/price")
-    fun getCurrencyData(
+    suspend fun getCurrencyData(
     @Query(QUERY_PARAM_FROM_SYMBOLS)
     fromCurrency: String = BASE_CRYPTO_CURRENCY,
 
     @Query(QUERY_PARAM_TO_SYMBOLS)
     toCurrency: String?,
 
-    ) : Call<CoinPrice>?
+    ) : CoinPrice?
 }
