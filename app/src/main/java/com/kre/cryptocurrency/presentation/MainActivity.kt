@@ -7,6 +7,7 @@ import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.kre.cryptocurrency.R
 import com.kre.cryptocurrency.databinding.ActivityMainBinding
 import dagger.hilt.android.AndroidEntryPoint
@@ -29,13 +30,16 @@ class MainActivity : AppCompatActivity() {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
             insets
         }
+
         setupLiveData()
+        setupCoinsRV()
         setupButtons()
     }
 
     private fun setupLiveData() {
         viewModel.remoteLiveData.observe(this) {
             Log.d(TAG, "setupLiveData: $it")
+            adapter.submitList(it)
         }
     }
 
@@ -46,5 +50,10 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
+    private val adapter = CoinsAdapter()
+    private fun setupCoinsRV() {
+        binding.coinsLIst.layoutManager = LinearLayoutManager(this)
+        binding.coinsLIst.adapter = adapter
+    }
 
 }
