@@ -1,5 +1,6 @@
 package com.kre.cryptocurrency.presentation
 
+import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
@@ -7,6 +8,7 @@ import com.kre.cryptocurrency.domain.coin.CoinInfo
 import com.kre.cryptocurrency.domain.usecase.GetItemsUseCase
 import com.kre.cryptocurrency.domain.usecase.RetrieveDataUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.CoroutineExceptionHandler
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
@@ -20,8 +22,12 @@ class MainViewModel @Inject constructor(
         get() = getItemsUseCase()
 
 
+    private val handler = CoroutineExceptionHandler { _, exception ->
+        Log.e(TAG, "CoroutineExceptionHandler got $exception")
+    }
+
     fun retrieve(numberCurrency: Int) {
-        viewModelScope.launch {
+        viewModelScope.launch(handler) {
             retrieveDataUseCase(numberCurrency)
         }
 
