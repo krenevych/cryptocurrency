@@ -56,7 +56,7 @@ class RepositoryRemote @Inject constructor(
 
                                 cryptoCoinsMap[coinName]?.let {
 
-                                    it.id?.let {id ->
+                                    it.id?.let { id ->
                                         listCurrency.add(
                                             coinExchangeInfo.toCoinBase(
                                                 id = id,
@@ -64,13 +64,9 @@ class RepositoryRemote @Inject constructor(
                                             )
                                         )
                                     }
-
-
                                 }
-
                             }
                         }
-
                     }
 
                     _liveData.value = listCurrency
