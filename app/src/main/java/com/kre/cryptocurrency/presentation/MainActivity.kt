@@ -10,6 +10,7 @@ import androidx.core.view.WindowInsetsCompat
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.kre.cryptocurrency.R
 import com.kre.cryptocurrency.databinding.ActivityMainBinding
+import com.kre.cryptocurrency.presentation.adapter.CoinsAdapter
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint

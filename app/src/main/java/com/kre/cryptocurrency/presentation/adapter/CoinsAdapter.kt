@@ -1,4 +1,4 @@
-package com.kre.cryptocurrency.presentation
+package com.kre.cryptocurrency.presentation.adapter
 
 import android.view.LayoutInflater
 import android.view.ViewGroup

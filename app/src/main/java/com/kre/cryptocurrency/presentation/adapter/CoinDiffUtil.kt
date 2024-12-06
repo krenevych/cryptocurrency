@@ -1,4 +1,4 @@
-package com.kre.cryptocurrency.presentation
+package com.kre.cryptocurrency.presentation.adapter
 
 import androidx.recyclerview.widget.DiffUtil
 import com.kre.cryptocurrency.domain.coin.CoinBaseInfo
