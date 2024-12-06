@@ -6,6 +6,7 @@ import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.kre.cryptocurrency.databinding.ItemCoinInfoBinding
 import com.kre.cryptocurrency.domain.coin.CoinBaseInfo
+import com.squareup.picasso.Picasso
 
 class CoinsAdapter : ListAdapter<CoinBaseInfo, CoinsAdapter.ViewHolder>(CoinDiffUtil()) {
 
@@ -25,7 +26,7 @@ class CoinsAdapter : ListAdapter<CoinBaseInfo, CoinsAdapter.ViewHolder>(CoinDiff
 
         with(holder.binding) {
             tvSymbols.text = coinInfo.name
-
+            Picasso.get().load(coinInfo.imageUrl).into(ivLogoCoin)
         }
     }
 

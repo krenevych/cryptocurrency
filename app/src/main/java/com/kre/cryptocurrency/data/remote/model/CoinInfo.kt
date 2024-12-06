@@ -2,6 +2,7 @@ package com.kre.cryptocurrency.data.remote.model
 
 
 import com.google.gson.annotations.SerializedName
+import com.kre.cryptocurrency.data.remote.retrofit.BASE_URL
 import com.kre.cryptocurrency.domain.coin.CoinBaseInfo
 
 data class CoinInfo(
@@ -46,7 +47,7 @@ data class CoinInfo(
             id = this.id,
             name = this.name,
             fullName = this.fullName,
-            imageUrl = this.imageUrl,
+            imageUrl = "$BASE_URL${this.imageUrl}",
         )
     }
 
