@@ -2,7 +2,7 @@ package com.kre.cryptocurrency.data.remote.retrofit
 
 import com.kre.cryptocurrency.data.remote.model.CoinResponse
 import com.kre.cryptocurrency.data.remote.model.CoinPrice
-import retrofit2.Call
+import com.kre.cryptocurrency.data.remote.model.CoinRawData
 import retrofit2.http.GET
 import retrofit2.http.Query
 
@@ -29,7 +29,7 @@ interface ServiceCryptoCurrency {
         @Query(QUERY_PARAM_TO_SYMBOLS)
         toCurrency: String = BASE_CURRENCY,
 
-        ): CoinResponse?
+        ): CoinRawData?
 
 //    https://min-api.cryptocompare.com/data/price?fsym=BTC&tsyms=USD,JPY,EUR
     @GET("data/price")

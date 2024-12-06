@@ -6,4 +6,8 @@ data class CoinInfo(
     val id: String?,
     val imageUrl: String?,
     val name: String?,
+    val lastUpdate: String? = null,
+    val toCurrency: String? = null,
+    val price: Double? = null,
+
 )

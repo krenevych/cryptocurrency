@@ -1,5 +1,6 @@
 package com.kre.cryptocurrency.presentation.adapter
 
+import android.annotation.SuppressLint
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.ListAdapter
@@ -21,11 +22,15 @@ class CoinsAdapter : ListAdapter<CoinInfo, CoinsAdapter.ViewHolder>(CoinDiffUtil
         return ViewHolder(binding)
     }
 
+    @SuppressLint("SetTextI18n")
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val coinInfo = getItem(position)
 
         with(holder.binding) {
-            tvSymbols.text = coinInfo.name
+            tvSymbols.text = "${coinInfo.name} / ${coinInfo.toCurrency}"
+            tvPrice.text = coinInfo.price.toString()
+            tvLastUpdate.text = "Last update: " + coinInfo.lastUpdate
+
             Picasso.get().load(coinInfo.imageUrl).into(ivLogoCoin)
         }
     }

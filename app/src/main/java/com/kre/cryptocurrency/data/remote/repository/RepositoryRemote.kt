@@ -1,15 +1,20 @@
 package com.kre.cryptocurrency.data.remote.repository
 
+import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
+import com.google.gson.Gson
+import com.google.gson.JsonObject
+import com.kre.cryptocurrency.data.remote.model.CoinExchangeInfo
 import com.kre.cryptocurrency.data.remote.model.CoinInfoRetrofit
+import com.kre.cryptocurrency.data.remote.retrofit.BASE_CURRENCY
 import com.kre.cryptocurrency.data.remote.retrofit.ServiceCryptoCurrency
 import com.kre.cryptocurrency.domain.coin.CoinInfo
 import com.kre.cryptocurrency.domain.repository.Repository
 import javax.inject.Inject
 
 class RepositoryRemote @Inject constructor(
-    private val serviceCryptoCurrency: ServiceCryptoCurrency
+    private val serviceCryptoCurrency: ServiceCryptoCurrency,
 ) : Repository {
 
     private val _liveData = MutableLiveData<List<CoinInfo>>()
@@ -21,68 +26,58 @@ class RepositoryRemote @Inject constructor(
     override suspend fun retrieve(numberCurrency: Int) {
         val responseCall = serviceCryptoCurrency.getCurrencyList(limit = numberCurrency)
 
-
-
-        responseCall?.let {
-            it.coins ?: return
-
-            val coins = mutableListOf<CoinInfo>()
-            it.coins.forEach { data ->
-                data.coinInfo?.let { coinInfo: CoinInfoRetrofit ->
-                    coins += coinInfo.toCoinBase()
+        val coinsMap = mutableMapOf<String, CoinInfoRetrofit>()
+        val coinsList = responseCall?.let { response ->
+            val coins = mutableListOf<String>()
+            response.coins?.forEach { data ->
+                data.coinInfo?.name?.let {
+                    coinsMap[it] = data.coinInfo
+                    coins.add(it)
                 }
             }
 
-            _liveData.value = coins
+            coins
         }
 
+        val coinsNames = coinsList?.joinToString(",")
 
-//        responseCall?.enqueue(object : Callback<CoinResponse> {
-//            override fun onResponse(coinResponseCall: Call<CoinResponse>, response: Response<CoinResponse>) {
-//
-//                response.body()?.let {
-//
-//                    it.coins ?: return
-//
-//                    val coins = mutableListOf<CoinInfo>()
-//                    it.coins.forEach { data ->
-//                        data.coinInfo?.let { coinInfo: CoinInfoRetrofit ->
-//                            coins += coinInfo.toCoinBase()
-//                        }
-//                    }
-//
-//                    _liveData.value = coins
-//                }
-//
-//
-//            }
-//
-//            override fun onFailure(coinResponseCall: Call<CoinResponse>, throwable: Throwable) {
-//                Log.e(TAG, "onFailure: $throwable")
-//
-//                _liveData.value = listOf()
-//            }
-//
-//        })
+
+        Log.d(TAG, "retrieve: $coinsNames")
+
+        coinsNames?.let {
+            serviceCryptoCurrency.getCurrencyExchange(fromCurrency = coinsNames)
+                ?.also { coinRawData ->
+                    val listCurrency = mutableListOf<CoinInfo>()
+                    for (coinName in coinsList) {
+                        coinRawData.jsonObject?.let { jsonObject ->
+                            if (jsonObject.has(coinName)) {
+
+                                val jsonElementUsd = jsonObject.getAsJsonObject(coinName)
+
+                                val crypto: JsonObject =
+                                    jsonElementUsd.getAsJsonObject(BASE_CURRENCY)
+                                val coinExchangeInfo =
+                                    Gson().fromJson(crypto, CoinExchangeInfo::class.java)
+
+                                coinsMap[coinName]?.let {
+                                    listCurrency.add(
+                                        coinExchangeInfo.toCoinBase(
+                                            id = it.id!!,
+                                            fullName = it.fullName!!
+                                        )
+                                    )
+                                }
+
+                            }
+                        }
+
+                    }
+
+                    _liveData.value = listCurrency
+                }
+        }
 
     }
-
-//    fun retrieveCryptoCurrency() {
-//        val coinPriceCall = serviceCryptoCurrency.getCurrencyData("BTC", "USD,JPY,EUR")
-//        coinPriceCall?.enqueue(object : Callback<CoinPrice> {
-//            override fun onResponse(
-//                coinResponseCall: Call<CoinPrice>,
-//                response: Response<CoinPrice>,
-//            ) {
-//                _liveData.value = response.body().toString()
-//            }
-//
-//            override fun onFailure(coinResponseCall: Call<CoinPrice>, throwable: Throwable) {
-//                _liveData.value = throwable.message
-//            }
-//
-//        })
-//    }
 
 
     companion object {
