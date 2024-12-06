@@ -1,3 +1,3 @@
 package com.kre.cryptocurrency.presentation
 
-val TAG = "XXXX"
+const val TAG = "XXXX"

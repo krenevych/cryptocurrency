@@ -37,7 +37,7 @@ class MainActivity : AppCompatActivity() {
 
     private fun setupLiveData() {
         viewModel.remoteLiveData.observe(this) {
-            binding.textViewFactorial.text = it
+            binding.textViewFactorial.text = it.toString()
         }
     }
 

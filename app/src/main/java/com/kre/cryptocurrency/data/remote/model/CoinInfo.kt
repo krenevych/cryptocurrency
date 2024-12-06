@@ -2,6 +2,7 @@ package com.kre.cryptocurrency.data.remote.model
 
 
 import com.google.gson.annotations.SerializedName
+import com.kre.cryptocurrency.domain.coin.CoinBaseInfo
 
 data class CoinInfo(
 //    @SerializedName("Algorithm")
@@ -37,5 +38,17 @@ data class CoinInfo(
 //    @SerializedName("Type")
 //    val type: Int? = null,
     @SerializedName("Url")
-    val url: String? = null
-)
+    val url: String? = null,
+) {
+
+    fun toCoinBase(): CoinBaseInfo {
+        return CoinBaseInfo(
+            id = this.id,
+            name = this.name,
+            fullName = this.fullName,
+            imageUrl = this.imageUrl,
+        )
+    }
+
+
+}

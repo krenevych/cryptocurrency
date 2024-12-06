@@ -5,7 +5,7 @@ import com.google.gson.annotations.SerializedName
 
 data class CoinResponse(
     @SerializedName("Data")
-    val `data`: List<Data>? = listOf(),
+    val coins: List<Data>? = listOf(),
 //    @SerializedName("HasWarning")
 //    val hasWarning: Boolean? = false,
 //    @SerializedName("Message")
