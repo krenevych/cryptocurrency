@@ -36,6 +36,12 @@ class MainActivity : AppCompatActivity() {
         setupButtons()
     }
 
+    override fun onStart() {
+        super.onStart()
+
+        viewModel.retrieve()
+    }
+
     private fun setupLiveData() {
         viewModel.remoteLiveData.observe(this) {
             Log.d(TAG, "setupLiveData: $it")
