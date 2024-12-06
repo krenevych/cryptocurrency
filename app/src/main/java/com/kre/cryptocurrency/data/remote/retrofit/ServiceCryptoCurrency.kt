@@ -1,7 +1,6 @@
 package com.kre.cryptocurrency.data.remote.retrofit
 
 import com.kre.cryptocurrency.data.remote.model.CoinResponse
-import com.kre.cryptocurrency.data.remote.model.CoinPrice
 import com.kre.cryptocurrency.data.remote.model.CoinRawData
 import retrofit2.http.GET
 import retrofit2.http.Query
@@ -31,14 +30,4 @@ interface ServiceCryptoCurrency {
 
         ): CoinRawData?
 
-//    https://min-api.cryptocompare.com/data/price?fsym=BTC&tsyms=USD,JPY,EUR
-    @GET("data/price")
-    suspend fun getCurrencyData(
-    @Query(QUERY_PARAM_FROM_SYMBOLS)
-    fromCurrency: String = BASE_CRYPTO_CURRENCY,
-
-    @Query(QUERY_PARAM_TO_SYMBOLS)
-    toCurrency: String?,
-
-    ) : CoinPrice?
 }
