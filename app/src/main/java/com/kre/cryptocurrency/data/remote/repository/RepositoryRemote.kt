@@ -3,11 +3,10 @@ package com.kre.cryptocurrency.data.remote.repository
 import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import com.kre.cryptocurrency.data.remote.model.CoinInfo
+import com.kre.cryptocurrency.data.remote.model.CoinInfoRetrofit
 import com.kre.cryptocurrency.data.remote.model.CoinResponse
-import com.kre.cryptocurrency.data.remote.model.CoinPrice
 import com.kre.cryptocurrency.data.remote.retrofit.ServiceCryptoCurrency
-import com.kre.cryptocurrency.domain.coin.CoinBaseInfo
+import com.kre.cryptocurrency.domain.coin.CoinInfo
 import com.kre.cryptocurrency.domain.repository.Repository
 import retrofit2.Call
 import retrofit2.Callback
@@ -18,9 +17,9 @@ class RepositoryRemote @Inject constructor(
     private val serviceCryptoCurrency: ServiceCryptoCurrency
 ) : Repository {
 
-    private val _liveData = MutableLiveData<List<CoinBaseInfo>>()
+    private val _liveData = MutableLiveData<List<CoinInfo>>()
 
-    override fun getLiveData(): LiveData<List<CoinBaseInfo>> {
+    override fun getLiveData(): LiveData<List<CoinInfo>> {
         return _liveData
     }
 
@@ -33,9 +32,9 @@ class RepositoryRemote @Inject constructor(
 
                     it.coins ?: return
 
-                    val coins = mutableListOf<CoinBaseInfo>()
+                    val coins = mutableListOf<CoinInfo>()
                     it.coins.forEach { data ->
-                        data.coinInfo?.let { coinInfo: CoinInfo ->
+                        data.coinInfo?.let { coinInfo: CoinInfoRetrofit ->
                             coins += coinInfo.toCoinBase()
                         }
                     }

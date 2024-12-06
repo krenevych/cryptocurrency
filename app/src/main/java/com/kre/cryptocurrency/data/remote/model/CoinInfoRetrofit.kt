@@ -3,9 +3,9 @@ package com.kre.cryptocurrency.data.remote.model
 
 import com.google.gson.annotations.SerializedName
 import com.kre.cryptocurrency.data.remote.retrofit.BASE_URL
-import com.kre.cryptocurrency.domain.coin.CoinBaseInfo
+import com.kre.cryptocurrency.domain.coin.CoinInfo
 
-data class CoinInfo(
+data class CoinInfoRetrofit(
 //    @SerializedName("Algorithm")
 //    val algorithm: String? = null,
 //    @SerializedName("AssetLaunchDate")
@@ -42,8 +42,8 @@ data class CoinInfo(
     val url: String? = null,
 ) {
 
-    fun toCoinBase(): CoinBaseInfo {
-        return CoinBaseInfo(
+    fun toCoinBase(): CoinInfo {
+        return CoinInfo(
             id = this.id,
             name = this.name,
             fullName = this.fullName,

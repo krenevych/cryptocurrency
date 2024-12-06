@@ -1,7 +1,7 @@
 package com.kre.cryptocurrency.domain.coin
 
 
-data class CoinBaseInfo(
+data class CoinInfo(
     val fullName: String?,
     val id: String?,
     val imageUrl: String?,

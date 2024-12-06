@@ -5,10 +5,10 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.kre.cryptocurrency.databinding.ItemCoinInfoBinding
-import com.kre.cryptocurrency.domain.coin.CoinBaseInfo
+import com.kre.cryptocurrency.domain.coin.CoinInfo
 import com.squareup.picasso.Picasso
 
-class CoinsAdapter : ListAdapter<CoinBaseInfo, CoinsAdapter.ViewHolder>(CoinDiffUtil()) {
+class CoinsAdapter : ListAdapter<CoinInfo, CoinsAdapter.ViewHolder>(CoinDiffUtil()) {
 
     class ViewHolder(
         val binding: ItemCoinInfoBinding,
