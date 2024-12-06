@@ -7,34 +7,28 @@
     android:layout_height="match_parent"
     tools:context=".presentation.MainActivity">
 
-    <Button
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/shopItems"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.5"
+        tools:listitem="@layout/item_coin_info" />
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/buttonReceive"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
-        android:text="@string/receive_data"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-
-
-    <ScrollView
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:padding="16dp"
+        android:layout_marginEnd="@dimen/add_button_margin"
+        android:layout_marginBottom="@dimen/add_button_margin"
+        android:contentDescription="@string/add_element"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/buttonReceive">
-
-        <TextView
-            android:id="@+id/textViewFactorial"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            tools:text="1000" />
-
-    </ScrollView>
+        app:srcCompat="@android:drawable/ic_menu_upload" />
 
 
 

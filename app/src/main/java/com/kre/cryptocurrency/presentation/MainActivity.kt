@@ -31,13 +31,11 @@ class MainActivity : AppCompatActivity() {
         }
         setupLiveData()
         setupButtons()
-
-
     }
 
     private fun setupLiveData() {
         viewModel.remoteLiveData.observe(this) {
-            binding.textViewFactorial.text = it.toString()
+            Log.d(TAG, "setupLiveData: $it")
         }
     }
 

@@ -1,4 +1,5 @@
 <resources>
     <string name="app_name">CryptoCurrency</string>
     <string name="receive_data">Receive Data</string>
+    <string name="add_element">update</string>
 </resources>
