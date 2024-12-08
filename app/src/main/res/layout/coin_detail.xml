@@ -92,7 +92,6 @@
 
             </LinearLayout>
 
-
             <LinearLayout
                 android:id="@+id/llMinPrice"
                 android:layout_width="match_parent"
@@ -121,7 +120,6 @@
 
             </LinearLayout>
 
-
             <LinearLayout
                 android:id="@+id/llMaxPrice"
                 android:layout_width="match_parent"
@@ -149,7 +147,6 @@
                     tools:text="7820.1" />
 
             </LinearLayout>
-
 
             <LinearLayout
                 android:id="@+id/llMin24"
@@ -180,7 +177,6 @@
 
             </LinearLayout>
 
-
             <LinearLayout
                 android:id="@+id/llMax24"
                 android:layout_width="match_parent"
@@ -209,9 +205,6 @@
 
 
             </LinearLayout>
-
-/////////
-
 
             <LinearLayout
                 android:id="@+id/llMinHour"
@@ -242,7 +235,6 @@
 
             </LinearLayout>
 
-
             <LinearLayout
                 android:id="@+id/llMaxHour"
                 android:layout_width="match_parent"
@@ -270,10 +262,6 @@
                     tools:text="7820.1" />
 
             </LinearLayout>
-
-
-            ///////////
-
 
             <LinearLayout
                 android:id="@+id/llLastDeal"
@@ -329,7 +317,6 @@
                     android:textSize="16sp"
                     tools:text="21:05:16" />
             </LinearLayout>
-
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
