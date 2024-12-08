@@ -22,6 +22,10 @@ class RepositoryRemote @Inject constructor(
         return _liveData
     }
 
+    override suspend fun getCoinInfo(id: Int): CoinInfo {
+        TODO("Not yet implemented")
+    }
+
     override suspend fun retrieve(numberCurrency: Int) {
         val responseCall = serviceCryptoCurrency.getCurrencyList(limit = numberCurrency)
 

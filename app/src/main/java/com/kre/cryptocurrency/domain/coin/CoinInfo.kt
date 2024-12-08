@@ -3,7 +3,7 @@ package com.kre.cryptocurrency.domain.coin
 
 data class CoinInfo(
     val fullName: String?,
-    val id: String?,
+    val id: Int?,
     val imageUrl: String?,
     val name: String?,
     val lastUpdate: String? = null,

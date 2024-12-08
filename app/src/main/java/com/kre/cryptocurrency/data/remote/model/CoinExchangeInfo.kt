@@ -112,7 +112,7 @@ data class CoinExchangeInfo(
 
     private fun getDate(timeStamp: Long): String = simpleDateFormat.format(Date(timeStamp * 1000))
 
-    fun toCoinBase(id: String, fullName: String): CoinInfo {
+    fun toCoinBase(id: Int, fullName: String): CoinInfo {
 
         val date = this.lastUpdate?.let { getDate(it) } ?: Date()
 

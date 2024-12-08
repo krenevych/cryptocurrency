@@ -5,7 +5,7 @@ import com.google.gson.annotations.SerializedName
 
 data class CoinInfoRetrofit(
     @SerializedName("Id")
-    val id: String? = null,
+    val id: Int? = null,
 
     @SerializedName("FullName")
     val fullName: String? = null,

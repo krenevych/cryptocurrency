@@ -27,7 +27,7 @@ class CoinsAdapter : ListAdapter<CoinInfo, CoinsAdapter.ViewHolder>(CoinDiffUtil
         val coinInfo = getItem(position)
 
         with(holder.binding) {
-            tvSymbols.text = "${coinInfo.name} / ${coinInfo.toCurrency}"
+            tvSymbols.text = "${coinInfo.name} (${coinInfo.id}) / ${coinInfo.toCurrency}"
             tvPrice.text = coinInfo.price.toString()
             tvLastUpdate.text = "Last update: " + coinInfo.lastUpdate
 
