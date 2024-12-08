@@ -1,4 +1,4 @@
-package com.kre.cryptocurrency.data.remote.repository
+package com.kre.cryptocurrency.data.repository
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData

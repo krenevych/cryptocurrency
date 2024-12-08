@@ -1,6 +1,6 @@
 package com.kre.cryptocurrency.di
 
-import com.kre.cryptocurrency.data.remote.repository.RepositoryRemote
+import com.kre.cryptocurrency.data.repository.RepositoryRemote
 import com.kre.cryptocurrency.domain.repository.Repository
 import dagger.Binds
 import dagger.Module
