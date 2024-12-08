@@ -14,4 +14,9 @@ data class CoinInfo(
     val dayMaximum: Double? = null,
     val lastDeal: String? = null,
 
-)
+    val low24hour: Double? = null,
+    val high24hour: Double? = null,
+    val lowHour: Double? = null,
+    val highHour: Double? = null,
+
+    )

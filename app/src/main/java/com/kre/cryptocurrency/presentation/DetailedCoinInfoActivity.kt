@@ -47,6 +47,16 @@ class DetailedCoinInfoActivity : AppCompatActivity() {
                 tvMinPrice.text =coinInfo. dayMinimum.toString()
                 tvMaxPrice.text = coinInfo.dayMaximum.toString()
                 tvLastMarket.text = coinInfo.lastDeal
+
+                tvMax24Price.text = coinInfo.high24hour.toString()
+                tvMin24Price.text = coinInfo.low24hour.toString()
+
+                tvMaxHourPrice.text = coinInfo.highHour.toString()
+                tvMinHourPrice.text = coinInfo.lowHour.toString()
+
+
+
+
             }
         }
     }

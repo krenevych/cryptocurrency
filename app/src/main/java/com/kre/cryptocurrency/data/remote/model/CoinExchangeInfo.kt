@@ -108,11 +108,16 @@ data class CoinExchangeInfo(
     val volumeHourTo: Double? = null,
 ) {
 
-    private val simpleDateFormat by lazy { SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.getDefault()) }
+    private val simpleDateFormat by lazy {
+        SimpleDateFormat(
+            "yyyy-MM-dd HH:mm:ss",
+            Locale.getDefault()
+        )
+    }
 
     private fun getDate(timeStamp: Long): String = simpleDateFormat.format(Date(timeStamp * 1000))
 
-    fun toCoinBase(id: Int, fullName: String): CoinInfo {
+    fun toCoinInfo(id: Int, fullName: String): CoinInfo {
 
         val date = this.lastUpdate?.let { getDate(it) } ?: Date()
 
@@ -123,7 +128,16 @@ data class CoinExchangeInfo(
             imageUrl = "$BASE_URL${this.imageUrl}",
             toCurrency = this.toSymbol,
             price = this.price,
-            lastUpdate = date.toString()
+            lastUpdate = date.toString(),
+
+            dayMinimum = this.lowDay,
+            dayMaximum = this.highDay,
+            lastDeal = this.lastMarket,
+
+            low24hour = this.low24hour,
+            high24hour = this.high24hour,
+            lowHour = this.lowHour,
+            highHour = this.highHour,
         )
     }
 

@@ -74,7 +74,7 @@ class RepositoryRemote @Inject constructor(
 
                                     it.id?.let { id ->
                                         listCurrency.add(
-                                            coinExchangeInfo.toCoinBase(
+                                            coinExchangeInfo.toCoinInfo(
                                                 id = id,
                                                 fullName = it.fullName ?: it.name ?: ""
                                             )

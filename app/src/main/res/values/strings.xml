@@ -9,4 +9,9 @@
     <string name="max_price_label">Day maximum:</string>
     <string name="last_market_label">Last deal:</string>
     <string name="last_updated_label">Updated:</string>
+    <string name="_24_hours_minimum">24 hours minimum:</string>
+    <string name="_24_hours_maximum">24 hours maximum:</string>
+
+    <string name="last_hour_minimum">Last hour minimum:</string>
+    <string name="last_hour_maximum">Last hour maximum:</string>
 </resources>
