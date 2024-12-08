@@ -6,7 +6,7 @@ import androidx.room.PrimaryKey
 import com.kre.cryptocurrency.domain.coin.CoinInfo
 
 @Entity(tableName = "CoinInfoTable")
-data class CoinInfoEntity(
+data class CoinEntity(
 
     @PrimaryKey
     @ColumnInfo(name = "id")
@@ -73,7 +73,7 @@ data class CoinInfoEntity(
         )
 
     companion object {
-        fun CoinInfo.toEntity() = CoinInfoEntity(
+        fun CoinInfo.toEntity() = CoinEntity(
             fullName = fullName,
             id = id,
             imageUrl = imageUrl,

@@ -4,10 +4,10 @@ import android.content.Context
 import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
-import com.kre.cryptocurrency.data.local.model.CoinInfoEntity
+import com.kre.cryptocurrency.data.local.model.CoinEntity
 
 // Annotates class to be a Room Database with a table (entity) of the Word class
-@Database(entities = [CoinInfoEntity::class], version = 1)
+@Database(entities = [CoinEntity::class], version = 1)
 abstract class CoinDatabase : RoomDatabase() {
 
     abstract fun dao(): Dao
