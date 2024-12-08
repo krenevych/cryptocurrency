@@ -2,4 +2,11 @@
     <string name="app_name">CryptoCurrency</string>
     <string name="receive_data">Receive Data</string>
     <string name="add_element">update</string>
+
+    <string name="slash">/</string>
+    <string name="price_label">Price:</string>
+    <string name="min_price_label">Day minimum:</string>
+    <string name="max_price_label">Day maximum:</string>
+    <string name="last_market_label">Last deal:</string>
+    <string name="last_updated_label">Updated:</string>
 </resources>

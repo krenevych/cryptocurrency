@@ -11,6 +11,13 @@ import com.squareup.picasso.Picasso
 
 class CoinsAdapter : ListAdapter<CoinInfo, CoinsAdapter.ViewHolder>(CoinDiffUtil()) {
 
+    interface ItemClickListener {
+        fun onClick(id: Int)
+    }
+
+    var itemClickListener : ItemClickListener? = null
+
+
     class ViewHolder(
         val binding: ItemCoinInfoBinding,
     ) : RecyclerView.ViewHolder(binding.root)
@@ -32,6 +39,14 @@ class CoinsAdapter : ListAdapter<CoinInfo, CoinsAdapter.ViewHolder>(CoinDiffUtil
             tvLastUpdate.text = "Last update: " + coinInfo.lastUpdate
 
             Picasso.get().load(coinInfo.imageUrl).into(ivLogoCoin)
+
+            coinCardView.setOnClickListener {
+                coinInfo.id?.let {
+                    itemClickListener?.onClick(coinInfo.id)
+                }
+            }
+
+
         }
     }
 

@@ -1,12 +1,14 @@
 package com.kre.cryptocurrency.domain.usecase
 
+import androidx.lifecycle.LiveData
 import com.kre.cryptocurrency.domain.coin.CoinInfo
 import com.kre.cryptocurrency.domain.repository.Repository
+import javax.inject.Inject
 
-class GetCoinInfoUseCase(
+class GetCoinInfoUseCase @Inject constructor(
     private val repository: Repository
 ) {
-    suspend operator fun invoke(id: Int) : CoinInfo {
+    operator fun invoke(id: Int) : LiveData<CoinInfo> {
         return repository.getCoinInfo(id)
     }
 }

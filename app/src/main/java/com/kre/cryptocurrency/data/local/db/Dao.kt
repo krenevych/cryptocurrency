@@ -16,7 +16,7 @@ interface Dao {
     fun itemsLiveData(): LiveData<List<CoinInfoEntity>>  // when function returns LiveData it has suspend-functionality under the hood.
 
     @Query("SELECT * FROM CoinInfoTable WHERE id LIKE :id LIMIT 1")
-    suspend fun getItem(id: Int): CoinInfoEntity
+    fun getItem(id: Int): LiveData<CoinInfoEntity>
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun addItem(item: CoinInfoEntity)

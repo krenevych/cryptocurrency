@@ -1,5 +1,6 @@
 package com.kre.cryptocurrency.presentation
 
+import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import androidx.activity.enableEdgeToEdge
@@ -61,6 +62,18 @@ class MainActivity : AppCompatActivity() {
     private fun setupCoinsRV() {
         binding.coinsLIst.layoutManager = LinearLayoutManager(this)
         binding.coinsLIst.adapter = adapter
+
+        adapter.itemClickListener = object : CoinsAdapter.ItemClickListener {
+            override fun onClick(id: Int) {
+                Intent(this@MainActivity, DetailedCoinInfoActivity::class.java)
+                    .apply {
+                        putExtra(EXTRA_COIN_ID, id)
+                    }.also {
+                        startActivity(it)
+                    }
+            }
+
+        }
     }
 
 }
