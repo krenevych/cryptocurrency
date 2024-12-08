@@ -10,4 +10,8 @@ data class CoinInfo(
     val toCurrency: String? = null,
     val price: Double? = null,
 
+    val dayMinimum: Double? = null,
+    val dayMaximum: Double? = null,
+    val lastDeal: String? = null,
+
 )

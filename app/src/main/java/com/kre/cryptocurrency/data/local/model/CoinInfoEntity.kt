@@ -29,6 +29,15 @@ data class CoinInfoEntity(
 
     @ColumnInfo(name = "price")
     val price: Double? = null,
+
+    @ColumnInfo(name = "dayMinimum")
+    val dayMinimum: Double? = null,
+
+    @ColumnInfo(name = "dayMaximum")
+    val dayMaximum: Double? = null,
+
+    @ColumnInfo(name = "lastDeal")
+    val lastDeal: String? = null,
 ) {
 
     fun toCoinInfo() = CoinInfo(
@@ -39,6 +48,10 @@ data class CoinInfoEntity(
         lastUpdate = lastUpdate,
         toCurrency = toCurrency,
         price = price,
+        dayMinimum = dayMinimum,
+        dayMaximum = dayMaximum,
+        lastDeal = lastDeal,
+
     )
 
     companion object {
@@ -50,6 +63,9 @@ data class CoinInfoEntity(
             lastUpdate = lastUpdate,
             toCurrency = toCurrency,
             price = price,
+            dayMinimum = dayMinimum,
+            dayMaximum = dayMaximum,
+            lastDeal = lastDeal,
         )
     }
 }

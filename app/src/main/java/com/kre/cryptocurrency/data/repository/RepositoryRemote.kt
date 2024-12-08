@@ -30,16 +30,12 @@ class RepositoryRemote @Inject constructor(
     }
 
     override fun getCoinInfo(id: Int): LiveData<CoinInfo> {
-
         val infoEntityLiveData = dao.getItem(id)
-
         return MediatorLiveData<CoinInfo>().apply {
             addSource(infoEntityLiveData) {
                 value = it.toCoinInfo()
             }
         }
-
-//        return dao.getItem(id).toCoinInfo()
     }
 
     override suspend fun retrieve(numberCurrency: Int) {

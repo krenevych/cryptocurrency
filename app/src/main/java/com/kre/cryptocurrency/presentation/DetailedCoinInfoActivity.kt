@@ -38,17 +38,15 @@ class DetailedCoinInfoActivity : AppCompatActivity() {
 
     private fun setupLiveData() {
         viewModel.getCoinInfo(coinId).observe(this) {coinInfo ->
-//        viewModel.remoteLiveData.observe(this) {
             with(binding) {
-//                val coinInfo = it.filter {
-//                    it.id == coinId
-//                }.first()
-
                 Picasso.get().load(coinInfo.imageUrl).into(ivLogoCoin)
                 tvFromSymbol.text = coinInfo.name
                 tvToSymbol.text = coinInfo.toCurrency
                 tvPrice.text = coinInfo.price.toString()
                 tvLastUpdate.text = coinInfo.lastUpdate
+                tvMinPrice.text =coinInfo. dayMinimum.toString()
+                tvMaxPrice.text = coinInfo.dayMaximum.toString()
+                tvLastMarket.text = coinInfo.lastDeal
             }
         }
     }
