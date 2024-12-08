@@ -21,6 +21,9 @@ interface Dao {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun addItem(item: CoinInfoEntity)
 
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    suspend fun addItems(coins: List<CoinInfoEntity>)
+
     @Delete
     suspend fun removeItem(item: CoinInfoEntity)
 

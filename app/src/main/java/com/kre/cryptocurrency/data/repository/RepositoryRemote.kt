@@ -1,9 +1,12 @@
 package com.kre.cryptocurrency.data.repository
 
 import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.MediatorLiveData
 import com.google.gson.Gson
 import com.google.gson.JsonObject
+import com.kre.cryptocurrency.data.local.db.Dao
+import com.kre.cryptocurrency.data.local.model.coinsToEntities
+import com.kre.cryptocurrency.data.local.model.entitiesToItems
 import com.kre.cryptocurrency.data.remote.model.CoinExchangeInfo
 import com.kre.cryptocurrency.data.remote.model.CoinInfoRetrofit
 import com.kre.cryptocurrency.data.remote.retrofit.BASE_CURRENCY
@@ -14,17 +17,19 @@ import javax.inject.Inject
 
 class RepositoryRemote @Inject constructor(
     private val serviceCryptoCurrency: ServiceCryptoCurrency,
+    private val dao: Dao
 ) : Repository {
 
-    private val _liveData = MutableLiveData<List<CoinInfo>>()
-
     override fun getLiveData(): LiveData<List<CoinInfo>> {
-        return _liveData
+        val entityLiveData = dao.itemsLiveData()
+        return MediatorLiveData<List<CoinInfo>>().apply {
+            addSource(entityLiveData) {
+                value = entitiesToItems(it)
+            }
+        }
     }
 
-    override suspend fun getCoinInfo(id: Int): CoinInfo {
-        TODO("Not yet implemented")
-    }
+    override suspend fun getCoinInfo(id: Int) = dao.getItem(id).toCoinInfo()
 
     override suspend fun retrieve(numberCurrency: Int) {
         val responseCall = serviceCryptoCurrency.getCurrencyList(limit = numberCurrency)
@@ -73,7 +78,9 @@ class RepositoryRemote @Inject constructor(
                         }
                     }
 
-                    _liveData.value = listCurrency
+                    val entities = coinsToEntities(listCurrency)
+                    dao.addItems(entities)
+
                 }
         }
 
