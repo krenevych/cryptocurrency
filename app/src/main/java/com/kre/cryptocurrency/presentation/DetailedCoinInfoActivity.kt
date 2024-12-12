@@ -54,9 +54,6 @@ class DetailedCoinInfoActivity : AppCompatActivity() {
                 tvMaxHourPrice.text = coinInfo.highHour.toString()
                 tvMinHourPrice.text = coinInfo.lowHour.toString()
 
-
-
-
             }
         }
     }

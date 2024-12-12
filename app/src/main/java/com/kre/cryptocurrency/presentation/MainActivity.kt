@@ -2,7 +2,6 @@ package com.kre.cryptocurrency.presentation
 
 import android.content.Intent
 import android.os.Bundle
-import android.util.Log
 import androidx.activity.enableEdgeToEdge
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
@@ -35,26 +34,11 @@ class MainActivity : AppCompatActivity() {
 
         setupLiveData()
         setupCoinsRV()
-        setupButtons()
-    }
-
-    override fun onStart() {
-        super.onStart()
-
-        viewModel.retrieve(50)
     }
 
     private fun setupLiveData() {
         viewModel.remoteLiveData.observe(this) {
-            Log.d(TAG, "setupLiveData: $it")
             adapter.submitList(it)
-        }
-    }
-
-    private fun setupButtons() {
-        binding.buttonReceive.setOnClickListener {
-            Log.d(TAG, "button click: ")
-            viewModel.retrieve(50)
         }
     }
 

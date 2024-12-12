@@ -1,35 +1,33 @@
 package com.kre.cryptocurrency.presentation
 
-import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.ViewModel
-import androidx.lifecycle.viewModelScope
 import com.kre.cryptocurrency.domain.coin.CoinInfo
+import com.kre.cryptocurrency.domain.usecase.CancelWorkerJob
 import com.kre.cryptocurrency.domain.usecase.GetItemsUseCase
-import com.kre.cryptocurrency.domain.usecase.RetrieveDataUseCase
+import com.kre.cryptocurrency.domain.usecase.StartWorkerUpdateUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
-import kotlinx.coroutines.CoroutineExceptionHandler
-import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
 class MainViewModel @Inject constructor(
     private val getItemsUseCase: GetItemsUseCase,
-    private val retrieveDataUseCase: RetrieveDataUseCase
+    private val startWorkerUpdateUseCase: StartWorkerUpdateUseCase,
+    private val cancelWorkerJob: CancelWorkerJob,
 ) : ViewModel(){
 
     val remoteLiveData: LiveData<List<CoinInfo>>
         get() = getItemsUseCase()
 
 
-    private val handler = CoroutineExceptionHandler { _, exception ->
-        Log.e(TAG, "CoroutineExceptionHandler got $exception")
+    init {
+        startWorkerUpdateUseCase(50)
     }
 
-    fun retrieve(numberCurrency: Int) {
-        viewModelScope.launch(handler) {
-            retrieveDataUseCase(numberCurrency)
-        }
+    override fun onCleared() {
+        super.onCleared()
 
+        cancelWorkerJob()
     }
+
 }
