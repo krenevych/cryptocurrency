@@ -8,14 +8,12 @@ import androidx.work.ExistingWorkPolicy
 import androidx.work.WorkManager
 import com.kre.cryptocurrency.data.local.db.Dao
 import com.kre.cryptocurrency.data.local.model.entitiesToItems
-import com.kre.cryptocurrency.data.remote.retrofit.ServiceCryptoCurrency
 import com.kre.cryptocurrency.data.worker.UpdateWorker
 import com.kre.cryptocurrency.domain.coin.CoinInfo
 import com.kre.cryptocurrency.domain.repository.Repository
 import javax.inject.Inject
 
 class RepositoryRemote @Inject constructor(
-    private val serviceCryptoCurrency: ServiceCryptoCurrency,
     private val dao: Dao,
     application: Application,
 ) : Repository {
